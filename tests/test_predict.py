@@ -4,6 +4,10 @@ import scigantic_deeppk as deeppk
 
 _ASPIRIN = "CC(=O)OC1=CC=CC=C1C(=O)O"
 
+# Deep-PK has no SLA and CI runs several matrix jobs against it concurrently,
+# so the timeout here is generous on purpose -- a real job usually finishes
+# in under 90s, but this leaves room for a slow day on their server.
+
 
 def test_invalid_pred_type_raises():
     with pytest.raises(ValueError):
@@ -11,7 +15,7 @@ def test_invalid_pred_type_raises():
 
 
 def test_single_molecule_metabolism_prediction():
-    df = deeppk.predict(_ASPIRIN, pred_type="metabolism", poll_interval=8, timeout=180)
+    df = deeppk.predict(_ASPIRIN, pred_type="metabolism", poll_interval=8, timeout=280)
     assert len(df) == 1
     assert df["SMILES"].iloc[0] == _ASPIRIN
     assert "[Metabolism/CYP 3A4 Inhibitor] Predictions" in df.columns
@@ -19,7 +23,7 @@ def test_single_molecule_metabolism_prediction():
 
 def test_batch_prediction_returns_one_row_per_molecule():
     smiles = [_ASPIRIN, "CC(C)Cc1ccc(cc1)C(C)C(=O)O"]  # aspirin, ibuprofen
-    df = deeppk.predict(smiles, pred_type="metabolism", poll_interval=8, timeout=180)
+    df = deeppk.predict(smiles, pred_type="metabolism", poll_interval=8, timeout=280)
     assert len(df) == 2
     assert list(df["SMILES"]) == smiles
 
