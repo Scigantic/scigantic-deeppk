@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scigantic-deeppk"
+version = "0.1.0"
+description = "Client for Deep-PK's small-molecule ADMET/toxicity prediction API, plus a mirrored CYP450 inhibitor/substrate reference dataset."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT-0" }
+authors = [{ name = "Scigantic" }]
+keywords = ["deep-pk", "admet", "cheminformatics", "drug-discovery", "cytochrome-p450", "pharmacokinetics"]
+classifiers = [
+  "License :: OSI Approved :: MIT No Attribution License (MIT-0)",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Typing :: Typed",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Topic :: Scientific/Engineering :: Chemistry",
+]
+
+dependencies = [
+  "requests>=2.28,<3",
+  "pandas>=1.5,<3",
+  "pyarrow>=14,<20",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pytest-cov>=5", "mypy>=1.10", "pandas-stubs", "types-requests"]
+
+[project.urls]
+Homepage = "https://scigantic.com"
+Repository = "https://github.com/Scigantic/scigantic-deeppk"
+Issues = "https://github.com/Scigantic/scigantic-deeppk/issues"
+
+[project.scripts]
+scigantic-deeppk = "scigantic_deeppk.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+scigantic_deeppk = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["scigantic_deeppk"]
+
+[tool.mypy]
+strict = true
