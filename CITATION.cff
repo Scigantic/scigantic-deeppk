@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+title: scigantic-deeppk
+abstract: "Client for Deep-PK's small-molecule ADMET and toxicity prediction API, plus a mirrored CYP450 inhibitor and substrate reference dataset."
+authors:
+  - name: Scigantic
+    website: https://scigantic.com
+repository-code: https://github.com/Scigantic/scigantic-deeppk
+url: https://pypi.org/project/scigantic-deeppk/
+license: MIT-0
+keywords:
+  - "deep-pk"
+  - "admet"
+  - "cheminformatics"
+  - "drug-discovery"
+  - "cytochrome-p450"
+  - "pharmacokinetics"
+version: "0.1.0"
+date-released: '2026-09-06'
